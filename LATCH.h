@@ -83,7 +83,7 @@ void _LATCH(const int start, const int thread_stride, const uint8_t* const __res
 				const int by2 = _mm_extract_epi32(yints, 1);
 				const int cy2 = _mm_extract_epi32(yints, 2);
 				__m128i accum = _mm_setzero_si128();
-				for (int patchy = -3; patchy <= 4; ++patchy) {
+				for (int patchy = -3; patchy <= 3; ++patchy) {
 					const uint8_t* const __restrict im_a = image + stride*(ay2 + patchy) + ax2 - 3;
 					const uint8_t* const __restrict im_b = image + stride*(by2 + patchy) + bx2 - 3;
 					const uint8_t* const __restrict im_c = image + stride*(cy2 + patchy) + cx2 - 3;
