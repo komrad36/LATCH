@@ -16,11 +16,11 @@
 
  See my GitHub for the CUDA version, which is extremely fast.
 
- My implementation uses multithreading, SSE2/3, and 
+ My implementation uses multithreading, SSE2/3/4/4.1, AVX, AVX2, and 
  many many careful optimizations to implement the
  algorithm as described in the paper, but at great speed.
- This implementation outperforms the reference implementation by 600%
- single-threaded or 2200% multi-threaded (!) while exactly matching
+ This implementation outperforms the reference implementation by 800%
+ single-threaded or 3200% multi-threaded (!) while exactly matching
  the reference implementation's output and capabilities.
 
  All functionality is contained in the file LATCH.h.
