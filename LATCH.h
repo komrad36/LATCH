@@ -78,10 +78,9 @@ void _LATCH(const int start, const int thread_stride, const uint8_t* const __res
 				__m256i accum = _mm256_setzero_si256();
 				for (int patchy = 0; patchy < 7; ++patchy, imgbase += stride) {
 					const __m256i b = _mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[1])));
-					__m256i da = _mm256_sub_epi32(_mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[0]))), b);
-					da = _mm256_mullo_epi32(da, da);
+					const __m256i da = _mm256_sub_epi32(_mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[0]))), b);
 					const __m256i dc = _mm256_sub_epi32(_mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[2]))), b);
-					accum = _mm256_add_epi32(_mm256_sub_epi32(da, _mm256_mullo_epi32(dc, dc)), accum);
+					accum = _mm256_add_epi32(_mm256_sub_epi32(_mm256_mullo_epi32(da, da), _mm256_mullo_epi32(dc, dc)), accum);
 				}
 				__m128i sumv = _mm_add_epi32(_mm256_extractf128_si256(accum, 1), _mm256_castsi256_si128(accum));
 				sumv = _mm_add_epi32(sumv, _mm_shuffle_epi32(sumv, 14));
