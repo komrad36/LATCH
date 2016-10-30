@@ -82,7 +82,7 @@ void _LATCH(const int start, const int thread_stride, const uint8_t* const __res
 					const __m256i dc = _mm256_sub_epi32(_mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[2]))), b);
 					accum = _mm256_add_epi32(_mm256_sub_epi32(_mm256_mullo_epi32(da, da), _mm256_mullo_epi32(dc, dc)), accum);
 				}
-				__m128i sumv = _mm_add_epi32(_mm256_extractf128_si256(accum, 1), _mm256_castsi256_si128(accum));
+				__m128i sumv = _mm_add_epi32(_mm256_extracti128_si256(accum, 1), _mm256_castsi256_si128(accum));
 				sumv = _mm_add_epi32(sumv, _mm_shuffle_epi32(sumv, 14));
 				desc[fragment] |= (static_cast<uint32_t>(_mm_cvtsi128_si32(_mm_add_epi32(sumv, _mm_shuffle_epi32(sumv, 1)))) & 0x80000000U) >> (31 - bit);
 			}
