@@ -22,6 +22,10 @@
  This implementation outperforms the reference implementation by 800%
  single-threaded or 3200% multi-threaded (!) while exactly matching
  the reference implementation's output and capabilities.
+ 
+ If you do not have AVX2, uncomment the '#define NO_AVX2_PLEASE' in LATCH.h to route the code
+ through non-AVX2 isntructions. NOTE THAT THIS IS ABOUT 50% SLOWER.
+ A processor with full AVX2 support is highly recommended.
 
  All functionality is contained in the file LATCH.h.
  'main.cpp' is simply a sample test harness with example usage and
