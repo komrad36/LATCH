@@ -39,6 +39,7 @@
 // performance testing.
 //
 
+#include <bitset>
 #include <chrono>
 #include <iostream>
 #include <opencv2/opencv.hpp>
@@ -91,6 +92,11 @@ int main() {
 	// --------------------------------
 
 	std::cout << std::endl << "LATCH took " << static_cast<double>((end - start).count()) * 1e-3 / (static_cast<double>(runs) * static_cast<double>(kps.size())) << " us per desc over " << kps.size() << " desc" << (kps.size() == 1 ? "." : "s.") << std::endl << std::endl;
+
+	//for (int i = 0; i < 8; ++i) {
+	//	std::cout << std::bitset<64>(desc[i]) << std::endl;
+	//}
+	//std::cout << std::endl;
 
 	long long total = 0;
 	for (size_t i = 0; i < 8 * kps.size(); ++i) total += desc[i];
