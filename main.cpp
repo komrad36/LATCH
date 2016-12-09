@@ -34,8 +34,8 @@
 // single-threaded or 3200% multi-threaded (!) while exactly matching
 // the reference implementation's output and capabilities.
 //
-// If you do not have AVX2, uncomment the '#define NO_AVX2_PLEASE' in LATCH.h to route the code
-// through non-AVX2 isntructions. NOTE THAT THIS IS ABOUT 50% SLOWER.
+// If you do not have AVX2, uncomment the '#define NO_AVX_PLEASE' in LATCH.h to route the code
+// through SSE isntructions only. NOTE THAT THIS IS ABOUT 50% SLOWER.
 // A processor with full AVX2 support is highly recommended.
 //
 // All functionality is contained in the file LATCH.h. This file

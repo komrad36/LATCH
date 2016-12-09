@@ -35,7 +35,7 @@
 // the reference implementation's output and capabilities.
 //
 // If you do not have AVX2, uncomment the #define below to route the code
-// through non-AVX2 isntructions. NOTE THAT THIS IS ABOUT 50% SLOWER.
+// through only SSE isntructions. NOTE THAT THIS IS ABOUT 50% SLOWER.
 // A processor with full AVX2 support is highly recommended.
 //
 // All functionality is contained in the file LATCH.h.
@@ -46,7 +46,7 @@
 #pragma once
 
 
-//#define NO_AVX2_PLEASE
+//#define NO_AVX_PLEASE
 
 
 #include <future>
@@ -83,7 +83,7 @@ void _LATCH(const int start, const int thread_stride, const uint8_t* const __res
 				const __m128i offsets = _mm_add_epi32(_mm_sub_epi32(_mm_cvtps_epi32(_mm_add_ps(_mm_min_ps(_mm_max_ps(_mm_sub_ps(_mm_mul_ps(xs, cos_theta), _mm_mul_ps(ys, sin_theta)), _mm_set_ps1(-32.0f)), _mm_set_ps1(32.0f)), ptx)), _mm_set1_epi32(3)), _mm_mullo_epi32(_mm_set1_epi32(stride), _mm_cvtps_epi32(_mm_add_ps(_mm_min_ps(_mm_max_ps(_mm_add_ps(_mm_mul_ps(xs, sin_theta), _mm_mul_ps(ys, cos_theta)), _mm_set_ps1(-32.0f)), _mm_set_ps1(32.0f)), pty))));
 				const int o[]{ _mm_cvtsi128_si32(offsets), _mm_extract_epi32(offsets, 1), _mm_extract_epi32(offsets, 2) };
 				const uint8_t* __restrict imgbase = imgbase_static;
-#ifndef NO_AVX2_PLEASE
+#ifndef NO_AVX_PLEASE
 				__m256i accum = _mm256_setzero_si256();
 				for (int patchy = 0; patchy < 7; ++patchy, imgbase += stride) {
 					const __m256i b = _mm256_cvtepu8_epi32(_mm_loadu_si128(reinterpret_cast<const __m128i*>(imgbase + o[1])));
